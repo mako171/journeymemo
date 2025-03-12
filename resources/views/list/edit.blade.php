@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'リスト編集')
+@section('title', 'リスト/アルバム編集')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-10 mx-auto">
-            <h2>リスト編集</h2>
+            <h2>候補リスト/アルバム 編集</h2>
             <form action="{{ route('list.update', ['id' => $listpage->id]) }}" method="post" enctype="multipart/form-data">
                 @method('PUT') {{-- 更新処理を行うためにPUTメソッドを指定 --}}
                 @csrf
@@ -66,7 +66,7 @@
                 <div class="form-group row">
                     <label class="col-md-3">画像</label>
                     <div class="col-md-10">
-                        <p>選択中の画像:</p>
+                        <p>選択中の画像</p>
                         @foreach($listpage->images as $image)
                         <img src="{{ asset($image->url) }}" alt="image" class="img-thumbnail" width="50">
                         <a href="{{ asset($image->url) }}" target="_blank">{{ basename($image->url) }}</a>
@@ -83,7 +83,7 @@
                         $uploadableCount = max(0, 8 - $currentImageCount);
                         @endphp
 
-                        <p>新しい画像を選択:</p>
+                        <p>新しい画像を選択</p>
                         @for($i = 0; $i < $uploadableCount; $i++) <input type="file" class="form-control-file" name="images[]">
                             @endfor
                     </div>

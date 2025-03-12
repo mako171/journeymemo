@@ -69,12 +69,44 @@ class ListController extends Controller
         return $prefecture->area . $category->name . $image->listpage_id;
     }
 
-    public function index(Request $request)
+    public function index(Request $request, $prefectureId = null)
     {
-        // prefecture と category と imagesのリレーションを取得
-        $posts = Listpage::with(['prefecture', 'category', 'images'])->orderBy('created_at', 'desc')->get();
+        $type = $request->query('type', 'list');  // デフォルトはリスト
+        //$prefectureId = $request->query('prefecture_id');  // 都道府県ID取得
+        $query = Listpage::with(['prefecture', 'category', 'images']);
 
-        return view('list.index', ['posts' => $posts]);
+        if ($type === 'list') {
+            $query->where('list_log', 0);  // リストだけ
+        } else {
+            $query->where('list_log', 1);  // アルバムだけ
+        }
+
+        // 都道府県で絞り込み
+        if (!empty($prefectureId)) {
+            $query->where('prefecture_id', $prefectureId);
+        }
+
+        $posts = $query->orderBy('created_at', 'desc')->get();
+
+        // 選択中の都道府県名を取得
+        $prefectureName = null;
+        if (!empty($prefectureId)) {
+            $prefecture = Prefecture::find($prefectureId);
+            $prefectureName = $prefecture->area ?? '不明';
+        } else {
+            // 都道府県が選択されていない場合はトップ画面にリダイレクト
+            return redirect()->route('top.top');
+
+            // 都道府県が選択されていない場合
+            //$prefectureName = '全エリア';
+        }
+
+        return view('list.index', [
+            'posts' => $posts,
+            'type' => $type,
+            'prefectureId' => $prefectureId,
+            'prefectureName' => $prefectureName,
+        ]);
     }
 
     public function edit($id)
@@ -106,11 +138,6 @@ class ListController extends Controller
             $page->images()->whereIn('id', $removeImages)->delete();
         }
 
-        // 画像削除処理
-        //if ($request->remove == 'true') {
-        //    $page->images()->delete();
-        //}
-
         // 画像アップロード処理
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
@@ -128,7 +155,8 @@ class ListController extends Controller
         // 該当するデータを上書きして保存する
         $page->fill($list_form)->save();
 
-        return redirect('list/index');
+        return redirect()->route('list.index', $request->input('prefecture_id'));
+        //return redirect()->route('list.index', ['prefecture_id' => $request->input('prefecture_id')]);
     }
 
     public function delete(Request $request)
@@ -138,6 +166,6 @@ class ListController extends Controller
         // 削除する
         $page->delete();
 
-        return redirect('list/index/');
+        return redirect('list/index');
     }
 }

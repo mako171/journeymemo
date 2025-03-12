@@ -2,15 +2,15 @@
 @extends('layouts.app')
 
 {{-- app.blade.phpの@yield('title')に'リスト新規作成'を埋め込む --}}
-@section('title', 'リスト新規作成')
+@section('title', 'リスト/アルバム新規作成')
 
 {{-- app.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
 
 <div class="container">
     <div class="row">
-        <div class="col-md-10 mx-auto">
-            <h2>候補リスト / アルバム 新規作成</h2>
+        <div class="col-md-8 mx-auto">
+            <h2>候補リスト/アルバム 新規作成</h2>
             <form action="{{ route('list.store') }}" method="post" enctype="multipart/form-data">
                 @if (count($errors) > 0)
                 <ul>

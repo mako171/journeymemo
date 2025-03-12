@@ -23,16 +23,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 use App\Http\Controllers\TopController;
 
-Route::get('/', [TopController::class, 'create'])->name('top.create');
+Route::prefix('top')->name('top.')->middleware('auth')->group(function () {
+    Route::get('/', [TopController::class, 'top'])->name('top');
+    Route::get('index', [TopController::class, 'index'])->name('index');
+    Route::get('select', [TopController::class, 'select'])->name('select');
+});
 
 use App\Http\Controllers\ListController;
 
-Route::controller(ListController::class)->prefix('list')->name('list.')->middleware('auth')->group(function () {
-    Route::get('create', 'create')->name('create');
-    Route::post('store', 'store')->name('store');
-    Route::post('submit', 'submitForm')->name('submitForm');
-    Route::get('index', 'index')->name('index');
-    Route::get('{id}/edit', 'edit')->name('edit');
-    Route::put('{id}/edit', 'update')->name('update');
-    Route::post('delete', 'delete')->name('delete');
+Route::prefix('list')->name('list.')->middleware('auth')->group(function () {
+    Route::get('create', [ListController::class, 'create'])->name('create');
+    Route::post('store', [ListController::class, 'store'])->name('store');
+    Route::post('submit', [ListController::class, 'submitForm'])->name('submitForm');
+    Route::get('index/{prefecture_id?}', [ListController::class, 'index'])->name('index');
+    Route::get('{id}/edit', [ListController::class, 'edit'])->name('edit');
+    Route::put('{id}/edit', [ListController::class, 'update'])->name('update');
+    Route::post('delete', [ListController::class, 'delete'])->name('delete');
 });
