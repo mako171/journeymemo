@@ -8,9 +8,12 @@
 </head>
 
 <body>
-    <header>
-        <h2>都道府県 選択</h2>
-        <a href="{{ route('top.index') }}" class="btn btn-dark">検索</a>
+    <header class="custom-header">
+        <div class="header-container">
+            <h2 class="app-name">JourneyMemo</h2>
+            <h2 class="header-title">都道府県を選択</h2>
+            <a href="{{ route('top.search') }}" class="header-search-btn hover-color">検索</a>
+        </div>
     </header>
 
     <div id="japan-map" class="clearfix">

@@ -2,12 +2,17 @@
 
 @section('title', '選択詳細ページ')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/front.css') }}">
+<link rel="stylesheet" href="{{ asset('css/list_log.css') }}">
+@endsection
+
 @section('content')
 <div class="container">
-    <h2>選択した項目の詳細</h2>
+    <h3>選択した項目の詳細</h3>
     <div class="mb-3">
-        <a href="{{ route('list.create') }}" class="btn btn-outline-secondary">新規作成</a>
-        <!-- <a href="{{ route('top.top') }}" class="btn btn-outline-danger">トップページ</a> -->
+        <!-- <a href="{{ route('list.create') }}" class="btn btn-outline-secondary">新規作成</a>
+        <a href="{{ route('top.top') }}" class="btn btn-outline-danger">トップページ</a> -->
     </div>
 
     @foreach($posts as $post)
@@ -27,19 +32,28 @@
                 @endforeach
             </div>
             @endif
-            <form action="{{ route('list.edit', ['id' => $post->id]) }}" method="GET" style="display: inline;">
-                @csrf
-                <button type="submit">編集</button>
-            </form>
+            <div class="button-container">
+                <form action="{{ route('list.edit', ['id' => $post->id]) }}" method="GET" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="list-edit-button">編集</button>
+                </form>
 
-            <form action="{{ route('list.delete') }}" method="POST" style="display: inline;">
-                @csrf
-                @method('POST')
-                <input type="hidden" name="id" value="{{ $post->id }}">
-                <button type="submit">削除</button>
-            </form>
+                <form action="{{ route('list.delete') }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="id" value="{{ $post->id }}">
+                    <button type="submit" class="list-edit-button">削除</button>
+                </form>
+            </div>
         </div>
     </div>
     @endforeach
 </div>
+
+<style>
+    body {
+        background-color: #FFF9C4;
+        /* 背景色 */
+    }
+</style>
 @endsection

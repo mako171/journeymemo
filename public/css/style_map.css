@@ -5,16 +5,47 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary, time, mark, audio, video { 
 	margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; } /* HTML5 display-role reset for older browsers  */ article, aside, details, figcaption, figure,  footer, header, hgroup, menu, nav, section { display: block; } body { line-height: 1; } ol, ul { list-style: none; } blockquote, q { quotes: none; } blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; } table { border-collapse: collapse; border-spacing: 0; 
 }
-
-header{
-	margin: 10;
+.custom-header {
+    background-color: white;
+	padding: 10px;
+    border-bottom: 10px solid #e9ecef;
 }
+.header-container {
+    display: flex;
+    justify-content: space-between; /* 要素を左右に配置 */
+    align-items: center; /* 要素を垂直方向に中央揃え */
+    max-width: 1200px; /* 最大幅を設定（必要に応じて） */
+    margin: 0 auto; /* 中央寄せ */
+}
+.app-name {
+	color: #198754;
+	font-size: 18px;
+}
+.header-title {
+	color: black;
+    font-size: 23px;
+    margin: 0;
+}
+.header-search-btn {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.header-search-btn:hover {
+    background-color: #c1c4c6;
+}
+a.hover-color:hover {
+    color: white;
+}
+
 body {
   font-family: "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN","ヒラギノ角ゴ ProN W3", Meiryo, "メイリオ", sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
 	color: #000000;
-	background-color: #ffffff;
+	background-color: #e9ecef;
 }
 img {
 	vertical-align: bottom;

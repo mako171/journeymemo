@@ -25,7 +25,7 @@ use App\Http\Controllers\TopController;
 
 Route::prefix('top')->name('top.')->middleware('auth')->group(function () {
     Route::get('/', [TopController::class, 'top'])->name('top');
-    Route::get('index', [TopController::class, 'index'])->name('index');
+    Route::get('search', [TopController::class, 'search'])->name('search');
     Route::get('select', [TopController::class, 'select'])->name('select');
 });
 

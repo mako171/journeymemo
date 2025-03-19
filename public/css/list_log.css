@@ -1,0 +1,29 @@
+@charset "UTF-8";
+.list-edit-button {
+  background-color: rgba(121, 85, 72, 0.44);
+  color: black;
+  border: 1px solid black;
+  border-color: #0c0b0b;
+  border-radius: 5px;
+  padding: 2px 6px;
+  /*font-weight: bold;*/
+}
+
+.list-edit-button:hover {
+  background-color: rgba(121, 85, 72, 0.3411764706);
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* 右寄せ */
+  gap: 5px; /* ボタンの間隔を調整 */
+}
+
+.list-title-color {
+  background-color: rgba(158, 158, 158, 0.3803921569);
+}
+
+/*body {
+  background-color: #FFF9C4;
+  /* 背景色 
+}*/

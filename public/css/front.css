@@ -1,0 +1,72 @@
+@charset "UTF-8";
+.app-name {
+  color: #198754;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-around; /* 均等配置 */
+  align-items: center;
+  width: 100%; /* 適宜調整 */
+  padding: 5px 10px;
+}
+
+.header-toppage-button {
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.header-toppage-button:hover {
+  background-color: rgba(76, 175, 80, 0.6588235294);
+}
+
+.header-create-button {
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.header-create-button:hover {
+  background-color: rgba(76, 175, 80, 0.6588235294);
+}
+
+.header-search-button {
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.header-search-button:hover {
+  background-color: rgba(76, 175, 80, 0.6588235294);
+}
+
+.form-container {
+  /*background-color: rgba(0, 188, 212, 0.6509803922);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 16px;*/
+  font-weight: bold;
+}
+
+.form-control {
+  -webkit-appearance: auto;
+     -moz-appearance: auto;
+          appearance: auto;
+  border: 1px solid #767676;
+  border-radius: 2px;
+}

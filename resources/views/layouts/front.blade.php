@@ -18,11 +18,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- 各ページのCSS -->
-    @yield('styles')
-
+    <link href="{{ asset('css/front.css') }}" rel="stylesheet">
 </head>
 
 <body>

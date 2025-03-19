@@ -17,7 +17,7 @@ class TopController extends Controller
         return view('top.top', compact('prefectures'));
     }
 
-    public function index(Request $request)
+    public function search(Request $request)
     {
         $cond_title = $request->cond_title;
         $cond_category = $request->cond_category;
@@ -34,7 +34,7 @@ class TopController extends Controller
         $posts = $query->orderBy('created_at', 'desc')->get();
         $categories = Category::all();
 
-        return view('top.index', [
+        return view('top.search', [
             'posts' => $posts,
             'cond_title' => $cond_title,
             'cond_category' => $cond_category,
@@ -49,7 +49,7 @@ class TopController extends Controller
 
         // IDが空の場合の処理
         if (!$selectedPostIds) {
-            return redirect()->route('top.index')->with('error');
+            return redirect()->route('top.search')->with('error');
         }
 
         // 選択されたIDに対応するデータを取得
