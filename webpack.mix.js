@@ -16,4 +16,5 @@ const mix = require('laravel-mix');
  .sass('resources/sass/front.scss', 'public/css')
  .sass('resources/sass/search.scss', 'public/css')
  .sass('resources/sass/list_log.scss', 'public/css')
+ .sass('resources/sass/style_map.scss', 'public/css')
  .sourceMaps();

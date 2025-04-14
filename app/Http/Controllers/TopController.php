@@ -31,7 +31,8 @@ class TopController extends Controller
             $query->where('category_id', $cond_category);
         }
 
-        $posts = $query->orderBy('created_at', 'desc')->get();
+        // $posts = $query->orderBy('created_at', 'desc')->get();
+        $posts = $query->orderBy('created_at', 'desc')->paginate(15);
         $categories = Category::all();
 
         return view('top.search', [
@@ -44,6 +45,7 @@ class TopController extends Controller
 
     public function select(Request $request)
     {
+        //dd($request->all());
         // 選択されたIDを取得
         $selectedPostIds = $request->input('selected_posts');
 
@@ -55,6 +57,7 @@ class TopController extends Controller
         // 選択されたIDに対応するデータを取得
         $posts = Listpage::with(['prefecture', 'category', 'images'])
             ->whereIn('id', $selectedPostIds)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('top.select', compact('posts'));

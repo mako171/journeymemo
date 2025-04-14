@@ -4,19 +4,82 @@
     <meta charset="UTF-8">
     <title>都道府県選択</title>
     <link href="{{ asset('css/style_map.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
 <body>
     <header class="custom-header">
         <div class="header-container">
-            <h2 class="app-name">JourneyMemo</h2>
-            <h2 class="header-title">都道府県を選択</h2>
-            <a href="{{ route('top.search') }}" class="header-search-btn hover-color">検索</a>
+            <div class="left-items">
+                <h2 class="app-name">JourneyMemo</h2>
+                <h2 class="header-title"><strong>都道府県を選択</strong></h2>
+            </div>
+
+            <div class="right-items">
+                <a href="{{ route('top.search') }}" class="header-search-btn hover-color"><strong>検索</strong></a>
+
+                <nav class="navbar navbar-expand-md navbar-light">
+                    <div class="container">
+
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <!-- Left Side Of Navbar -->
+                            <ul class="navbar-nav me-auto">
+                            </ul>
+                            <!-- Right Side Of Navbar -->
+                            <ul class="navbar-nav ms-auto">
+                                <!-- Authentication Links -->
+                                @guest
+                                @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                                @endif
+
+                                @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                                @endif
+
+                                @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                                @endguest
+                            </ul>
+                        </div>
+
+                    </div>
+                </nav>
+
+            </div>
         </div>
     </header>
 
     <div id="japan-map" class="clearfix">
+
+        <div class="planea">
+        </div>
+        <div class="bullet-train">
+        </div>
 
         <div id="hokkaido-touhoku" class="clearfix">
             <p class="area-title">北海道・東北</p>
@@ -295,6 +358,19 @@
             </div>
         </div>
 
+        <style>
+            body {
+                background-color: #fff9c494;
+            }
+
+            p {
+                margin-bottom: 0rem;
+            }
+
+            a {
+                text-decoration: none;
+            }
+        </style>
     </div> <!-- japan-map -->
 
 </body>

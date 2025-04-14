@@ -27,3 +27,23 @@
   background-color: #FFF9C4;
   /* 背景色 
 }*/
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 常に3列 */
+  grid-template-rows: repeat(3, auto); /* 3行 */
+  gap: 10px; /* 画像の間隔 */
+  justify-items: center; /* 画像を中央配置 */
+}
+
+.post-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+@media (max-width: 768px) { /* スマホ向け */
+  .post-image {
+    max-width: 100px; /* スマホでは画像を小さくする */
+  }
+}

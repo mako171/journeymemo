@@ -1040,6 +1040,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvc2Fzcy9zZWFyY2guc2NzcyIsIm1hcHBpbmdzIjoiO0FBQUEiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvc2Fzcy9zZWFyY2guc2Nzcz8yOWJlIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIGV4dHJhY3RlZCBieSBtaW5pLWNzcy1leHRyYWN0LXBsdWdpblxuZXhwb3J0IHt9OyJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/sass/search.scss\n");
 
+/***/ }),
+
+/***/ "./resources/sass/style_map.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/style_map.scss ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvc2Fzcy9zdHlsZV9tYXAuc2NzcyIsIm1hcHBpbmdzIjoiO0FBQUEiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvc2Fzcy9zdHlsZV9tYXAuc2Nzcz8xMDg3Il0sInNvdXJjZXNDb250ZW50IjpbIi8vIGV4dHJhY3RlZCBieSBtaW5pLWNzcy1leHRyYWN0LXBsdWdpblxuZXhwb3J0IHt9OyJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/sass/style_map.scss\n");
+
 /***/ })
 
 /******/ 	});
@@ -1154,6 +1165,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
 /******/ 			"css/app": 0,
+/******/ 			"css/style_map": 0,
 /******/ 			"css/list_log": 0,
 /******/ 			"css/search": 0,
 /******/ 			"css/front": 0
@@ -1206,11 +1218,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/list_log","css/search","css/front"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/list_log","css/search","css/front"], () => (__webpack_require__("./resources/sass/app.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/list_log","css/search","css/front"], () => (__webpack_require__("./resources/sass/front.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/list_log","css/search","css/front"], () => (__webpack_require__("./resources/sass/search.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/list_log","css/search","css/front"], () => (__webpack_require__("./resources/sass/list_log.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/style_map","css/list_log","css/search","css/front"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/style_map","css/list_log","css/search","css/front"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/style_map","css/list_log","css/search","css/front"], () => (__webpack_require__("./resources/sass/front.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/style_map","css/list_log","css/search","css/front"], () => (__webpack_require__("./resources/sass/search.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/style_map","css/list_log","css/search","css/front"], () => (__webpack_require__("./resources/sass/list_log.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/style_map","css/list_log","css/search","css/front"], () => (__webpack_require__("./resources/sass/style_map.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
