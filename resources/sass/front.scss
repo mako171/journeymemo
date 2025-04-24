@@ -133,8 +133,8 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 30px;
+  gap: 0px;
+  margin-top: 10px;
 }
 
 .title-text {
@@ -147,7 +147,6 @@
   gap: 10px;
 }
 
-/* スマホ用：縦並びにする */
 @media (max-width: 600px) {
   .title-row {
     flex-direction: column;

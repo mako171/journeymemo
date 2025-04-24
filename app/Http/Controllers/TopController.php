@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Models\Prefecture;
 use App\Models\Listpage;
 use App\Models\Category;
@@ -45,13 +46,19 @@ class TopController extends Controller
 
     public function select(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
         // 選択されたIDを取得
-        $selectedPostIds = $request->input('selected_posts');
+        // $selectedPostIds = $request->input('selected_posts');
 
         // IDが空の場合の処理
-        if (!$selectedPostIds) {
-            return redirect()->route('top.search')->with('error');
+        // if (!$selectedPostIds) {
+        //    return redirect()->route('top.search')->with('error');
+        // }
+
+        $selectedPostIds = session('selected_posts', []);
+
+        if (empty($selectedPostIds)) {
+            return redirect()->route('top.search')->with('error', '選択された項目がありません');
         }
 
         // 選択されたIDに対応するデータを取得
@@ -60,6 +67,40 @@ class TopController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        // セッションの選択データをリセット！
+        session()->forget('selected_posts');
+
         return view('top.select', compact('posts'));
+    }
+
+    public function storeChecklist(Request $request)
+    {
+        $id = $request->input('id');
+        $checked = $request->input('checked');
+
+        // 現在のセッション内の選択済みIDを取得
+        $selected = session()->get('selected_posts', []);
+
+        if ($checked) {
+            // チェックが入った → ID追加
+            if (!in_array($id, $selected)) {
+                $selected[] = $id;
+            }
+        } else {
+            // チェックが外れた → ID削除
+            $selected = array_filter($selected, function ($item) use ($id) {
+                return $item != $id;
+            });
+        }
+        // 更新後のデータをセッションに保存
+        session()->put('selected_posts', $selected);
+
+        return response()->json([
+            'status' => 'success',
+            'selected' => $selected
+        ]);
+
+        // dd("test");
+        // return view('top.select');
     }
 }

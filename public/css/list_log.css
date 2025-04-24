@@ -27,7 +27,6 @@
   background-color: #FFF9C4;
   /* 背景色 
 }*/
-
 .image-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 常に3列 */
@@ -45,5 +44,43 @@
 @media (max-width: 768px) { /* スマホ向け */
   .post-image {
     max-width: 100px; /* スマホでは画像を小さくする */
+  }
+}
+.weather-info {
+  background-color: rgba(248, 184, 109, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: large;
+  border-radius: 1em;
+  margin: 5px;
+  padding: 0.5em 0.2em 0.2em 0.2em;
+}
+
+@media (max-width: 768px) {
+  .weather-info .flex-wrap {
+    /* flex-wrap: nowrap !important; */
+    gap: 0 !important;
+  }
+}
+.weather-info p {
+  /* background-color: #bcd7ef96; */
+  padding: 0.5em;
+  border-radius: 0.5em;
+  /* box-shadow: 0 2px 8px rgba(0,0,0,0.1); */
+  max-width: 300px;
+  /* margin: 0.5em 0; */
+}
+
+.swiper {
+  width: 100% !important;
+  padding: 0px 0px 40px 0px !important;
+}
+
+@media (max-width: 768px) {
+  .swiper {
+    width: 95% !important;
+    display: block !important;
   }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use App\Models\Listpage;
 use App\Models\Prefecture;
 use App\Models\Category;
@@ -90,22 +92,42 @@ class ListController extends Controller
 
         // 選択中の都道府県名を取得
         $prefectureName = null;
+        $weather = null;
+
         if (!empty($prefectureId)) {
             $prefecture = Prefecture::find($prefectureId);
             $prefectureName = $prefecture->area ?? '不明';
-        } else {
+            // } else {
             // 都道府県が選択されていない場合はトップ画面にリダイレクト
-            return redirect()->route('top.top');
+            // return redirect()->route('top.top');
 
             // 都道府県が選択されていない場合
-            //$prefectureName = '全エリア';
+            // $prefectureName = '全エリア';
+            // }
+
+            //　天気API呼び出し（OpenWeatherMap）
+            $apiKey = env('OPENWEATHER_API_KEY');
+            $city = $prefecture->area;  // ここが都市名に対応している必要がある
+            $apiurl = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid={$apiKey}&lang=ja&units=metric";
+
+            try {
+                $response = Http::get($apiurl);
+                $weather = $response->json();
+            } catch (\Exception $e) {
+                \Log::error("天気情報の取得失敗: " . $e->getMessage());
+                $weather = '天気情報取得失敗';
+            }
+        } else {
+            return redirect()->route('top.top');
         }
 
+        // dd($weather);
         return view('list.index', [
             'posts' => $posts,
             'type' => $type,
             'prefectureId' => $prefectureId,
             'prefectureName' => $prefectureName,
+            'weather' => $weather,
         ]);
     }
 

@@ -34,11 +34,11 @@
                 </a> -->
                 <div class="header-container">
                     <div class="app-name">
-                        <strong>JourneyMemo</strong>
+                        <strong><a href="{{ route('top.top') }}" class="header-toppage-button">JourneyMemo</a></strong>
                     </div>
-                    <a href="{{ route('top.top') }}" class="header-toppage-button">トップページ</a>
+                    <!-- <a href="{{ route('top.top') }}" class="header-toppage-button">トップページ</a>
                     <a href="{{ route('list.create') }}" class="header-create-button">新規作成</a>
-                    <a href="{{ route('top.search') }}" class="header-search-button">検索</a>
+                    <a href="{{ route('top.search') }}" class="header-search-button">検索</a> -->
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

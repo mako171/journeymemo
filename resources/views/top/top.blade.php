@@ -18,7 +18,8 @@
             </div>
 
             <div class="right-items">
-                <a href="{{ route('top.search') }}" class="header-search-btn hover-color"><strong>検索</strong></a>
+                <a href="{{ route('list.create') }}" class="header-create-button"><strong>新規作成</strong></a>
+                <a href="{{ route('top.search') }}" class="header-create-button"><strong>検索</strong></a>
 
                 <nav class="navbar navbar-expand-md navbar-light">
                     <div class="container">

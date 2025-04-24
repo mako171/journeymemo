@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="{{ asset('css/front.css') }}">
 <link rel="stylesheet" href="{{ asset('css/search.css') }}">
 @endsection
+@if (session('error'))
+<script>
+    alert("{{ session('error') }}");
+</script>
+@endif
 
 @section('content')
 <div class="container">
@@ -55,7 +60,9 @@
 </div>
 
 <!-- チェックボックス追加 -->
-<form action="{{ route('top.select') }}" method="get">
+<!-- <form action="{{ route('top.select') }}" method="get"> -->
+<form action="{{ route('top.select') }}" method="get" id="selection-form">
+    <input type="hidden" name="selected_posts_json" id="selected_posts_json">
     <div class="row">
         <div class="col-md-9 mx-auto mt-3">
             <!-- <div class="row"> -->
@@ -74,7 +81,11 @@
                         @foreach($posts as $post)
                         <tr>
                             <td>
-                                <input type="checkbox" name="selected_posts[]" value="{{ $post->id }}">
+                                @if(in_array($post->id, session('selected_posts', [])))
+                                <input type="checkbox" class="selecteds" name="selected_posts[]" value="{{ $post->id }}" onchange="toggleCheckboxes(this)" checked>
+                                @else
+                                <input type="checkbox" class="selecteds" name="selected_posts[]" value="{{ $post->id }}" onchange="toggleCheckboxes(this)">
+                                @endif
                             </td>
                             <td>{{ Str::limit($post->list_log == 0 ? 'リスト' : 'アルバム', 100) }}</td>
                             <td>{{ Str::limit($post->prefecture->area ?? '未設定', 100) }}</td>
@@ -114,3 +125,66 @@
     </div>
 </form>
 @endsection
+
+@section('scripts')
+<script>
+    function toggleCheckboxes(checkbox) {
+        const isChecked = checkbox.checked;
+        const id = checkbox.value;
+
+        fetch("{{ route('api.storeChecklist') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    checked: isChecked,
+                    id: id
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('HTTPエラー: ' + response.status);
+                }
+                alert('成功しました');
+                return;
+            })
+            .catch(error => {
+                alert('エラーが発生しました');
+                console.error(error);
+            });
+    }
+</script>
+@endsection
+
+<!-- @section('scripts')
+<script>
+    const toggleCheckboxes = async (checkbox, id) => {
+        const checked = checkbox.checked;
+
+        try {
+            const response = await fetch('/api/store-checklist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({
+                    checked,
+                    id
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('通信に失敗しました');
+            }
+
+            const data = await response.json();
+            console.log('チェックリスト更新成功:', data);
+        } catch (error) {
+            console.error('エラー:', error);
+        }
+    };
+</script>
+@endsection -->

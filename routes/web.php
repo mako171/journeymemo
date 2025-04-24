@@ -30,6 +30,10 @@ Route::prefix('top')->name('top.')->middleware('auth')->group(function () {
     Route::get('select', [TopController::class, 'select'])->name('select');
 });
 
+Route::prefix('api')->name('api.')->middleware('auth')->group(function () {
+    Route::post('store-checklist', [TopController::class, 'storeChecklist'])->name('storeChecklist');
+});
+
 use App\Http\Controllers\ListController;
 
 Route::prefix('list')->name('list.')->middleware('auth')->group(function () {

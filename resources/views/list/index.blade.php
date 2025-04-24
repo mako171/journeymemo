@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
 
-        <div class="swiper imageSwiper d-none d-md-block" style="width: 100%; padding: 0px 0px 20px 0px;">
+        <div class="swiper imageSwiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="image-wrapper">
@@ -45,11 +45,61 @@
         </div>
 
         <div class="col-md-9 mx-auto">
-            <div class="title-row">
-                <h2 class="title-text">
-                    <strong>{{ $type === 'list' ? '候補リスト' : 'アルバム' }}（{{ $prefectureName }}）</strong>
-                </h2>
-                <div class="button-group">
+            <h2 class="title-text mt-3">
+                <strong>{{ $type === 'list' ? '候補リスト' : 'アルバム' }}（{{ $prefectureName }}）</strong>
+            </h2>
+            <div class="thick-line mt-1">
+            </div>
+
+            <div class="title-row mb-4">
+                <div class="weather-info d-flex mb-3">
+                    <!-- <div class="weather-info">
+                    @if (is_array($weather) && isset($weather['main']['temp']))
+                    <p>天気 : {{ $weather['weather'][0]['description'] }}</p>
+                    <p>気温 : {{ $weather['main']['temp'] }}℃</p>
+                    <p>湿度 : {{ $weather['main']['humidity'] }}%</p>
+                    @else
+                    <p>気温情報が取得できませんでした</p>
+                    @endif
+                </div> -->
+                    @if (is_array($weather) && isset($weather['weather'][0]))
+                    @php
+                    $weatherId = $weather['weather'][0]['id'];
+                    $main = $weather['weather'][0]['main'];
+                    $description = $weather['weather'][0]['description'];
+                    $icon = $weather['weather'][0]['icon'];
+                    $temp = $weather['main']['temp'] ?? null;
+                    $humidity = $weather['main']['humidity'] ?? null;
+                    $iconUrl = "https://openweathermap.org/img/wn/{$icon}@2x.png";
+
+                    $category = match (true) {
+                    $weatherId >= 200 && $weatherId < 300=> '雷雨',
+                        $weatherId >= 300 && $weatherId < 400=> '霧雨',
+                            $weatherId >= 500 && $weatherId < 600=> '雨',
+                                $weatherId >= 600 && $weatherId < 700=> '雪',
+                                    $weatherId >= 700 && $weatherId < 800=> '大気（霧など）',
+                                        $weatherId === 800 => '晴れ',
+                                        $weatherId > 800 => '曇り',
+                                        default => '不明',
+                                        };
+                                        @endphp
+
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <img src="{{ $iconUrl }}" alt="天気アイコン" style="width: 50px; height: 50px;">
+                                            <div>
+                                                <div class="d-flex flex-row flex-wrap gap-4">
+                                                    <p class="mb-1">天気：{{ $category }}（{{ $description }}）</p>
+                                                    <p class="mb-1">気温：{{ $temp }}℃</p>
+                                                    <p class="mb-0">湿度：{{ $humidity }}%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <p>気象情報が取得できませんでした</p>
+                                        @endif
+                </div>
+
+                <div class="button-group mt-1">
                     <a href="{{ route('list.index', ['type' => 'list', 'prefecture_id' => $prefectureId]) }}" class="btn {{ $type === 'list' ? 'btn-primary' : 'btn-outline-primary' }}">
                         リスト
                     </a>
@@ -62,9 +112,6 @@
                     <a href="{{ route('top.search') }}" class="btn btn-dark">検索</a>
                 </div> -->
                 </div>
-            </div>
-
-            <div class="thick-line mb-4 mt-1">
             </div>
 
             @foreach($posts as $post)
